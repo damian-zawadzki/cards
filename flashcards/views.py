@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
-from vocabulary_manager import Vocabulary
-from time_machine import TimeMachine
+from .vocabulary_manager import Vocabulary
+from .time_machine import TimeMachine
 import csv
 
 card_opening_time = 0
