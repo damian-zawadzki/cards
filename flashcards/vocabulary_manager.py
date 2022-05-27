@@ -20,7 +20,8 @@ class Vocabulary:
         today_number = TimeMachine().date_to_number(today)
 
         unique_id_list = Card.objects.values_list("card_id", flat=True)
-        if len(unique_id_list) == 0:
+
+        if len(list(unique_id_list)) == 0:
             entry.card_id = 1
         else:
             last_card_id = max(list(unique_id_list))
