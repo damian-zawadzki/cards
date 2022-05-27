@@ -118,20 +118,25 @@ def login_user(request):
         email_address = request.POST["email_address"]
         password = request.POST["password"]
 
-        items = User.objects.values_list("email", "first_name", "last_name")
+        try:
+            items = User.objects.values_list("email", "first_name", "last_name")
 
-        for item in items:
-            if item[0] == email_address:
-                username = item[1] + item[2]
-                username = username.lower()
+            for item in items:
+                if item[0] == email_address:
+                    username = item[1] + item[2]
+                    username = username.lower()
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, ("You have successfully logged in."))
-            return redirect("home")
-        else:
-            messages.error(request, ("Wrong password or username. Try again."))
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, ("You have successfully logged in."))
+                return redirect("home")
+            else:
+                messages.error(request, ("Wrong password or username. Try again."))
+                return redirect("login_user")
+
+        except:
+            messages.error(request, ("Wrong username or password. Try again."))
             return redirect("login_user")
 
     else:
