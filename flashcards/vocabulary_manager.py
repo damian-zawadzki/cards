@@ -40,10 +40,11 @@ class Vocabulary:
             entry.due_date = today_number
             entry.interval = 0
             entry.number_of_reviews = 0
-            entry.answers = None
-            entry.card_opening_times = None
-            entry.card_closing_times = None
-            entry.card_revision_days = None
+            entry.answers = ""
+            entry.card_opening_times = ""
+            entry.card_closing_times = ""
+            entry.card_revision_days = ""
+            entry.line = 0
             entry.save()
 
     def display_all_entries(self, client):
@@ -121,7 +122,7 @@ class Vocabulary:
         else:
             pass
 
-        if entry.line == None:
+        if entry.line == 0:
             line = 1
         else:
             line = entry.line + 1
@@ -133,31 +134,31 @@ class Vocabulary:
         entry.number_of_reviews = entry.number_of_reviews + 1
 
         answers = entry.answers
-        if answers is None:
+        if answers is "":
             entry.answers = answer
         else:
             entry.answers = answers + ";" + answer
 
         card_opening_times = entry.card_opening_times
-        if card_opening_times is None:
+        if card_opening_times is "":
             entry.card_opening_times = str(card_opening_time)
         else:
             entry.card_opening_times = str(card_opening_times) + ";" + str(card_opening_time)
 
         card_closing_times = entry.card_closing_times
-        if card_closing_times is None:
+        if card_closing_times is "":
             entry.card_closing_times = str(now_number)
         else:
             entry.card_closing_times = str(card_closing_times) + ";" + str(now_number)
 
         durations = entry.durations
-        if durations is None:
+        if durations is "":
             entry.durations = str(now_number - card_opening_time)
         else:
             entry.durations = durations + ";" + str(now_number - card_opening_time)
 
         card_revision_days = entry.card_revision_days
-        if card_revision_days is None:
+        if card_revision_days is "":
             entry.card_revision_days = str(today_number)
         else:
             entry.card_revision_days = str(card_revision_days) + ";" + str(today_number) 
@@ -208,13 +209,13 @@ class Vocabulary:
 
     def edit_card(self, card_id, polish, english):
         with connection.cursor() as cursor:
-           cursor.execute(f"UPDATE flashcards_card SET polish = '{polish}', english = '{english}' WHERE card_id = {card_id}")
+            cursor.execute(f"UPDATE flashcards_card SET polish = '{polish}', english = '{english}' WHERE card_id = {card_id}")
 
         return "Card edited!"
 
     def delete_card(self, card_id):
         with connection.cursor() as cursor:
-           cursor.execute(f"DELETE FROM flashcards_card WHERE card_id = {card_id}")
+            cursor.execute(f"DELETE FROM flashcards_card WHERE card_id = {card_id}")
 
         return "Card deleted!"
 

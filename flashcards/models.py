@@ -11,14 +11,14 @@ class Card(models.Model):
     due_date = models.IntegerField()
     interval = models.IntegerField()
     number_of_reviews = models.IntegerField()
-    answers = models.CharField(max_length=200, null=True)
-    card_opening_times = models.CharField(max_length=200, null=True)
-    card_closing_times = models.CharField(max_length=200, null=True)
-    durations = models.CharField(max_length=200, null=True)
-    card_revision_days = models.CharField(max_length=200, null=True)
+    answers = models.CharField(max_length=200)
+    card_opening_times = models.CharField(max_length=200)
+    card_closing_times = models.CharField(max_length=200)
+    durations = models.CharField(max_length=200)
+    card_revision_days = models.CharField(max_length=200)
     line = models.IntegerField()
 
 
 class Client(models.Model):
     client = models.CharField(max_length=200)
-    daily_limit_of_new_cards = models.IntegerField()
+    daily_limit_of_new_cards = models.IntegerField(default=25, null=True)
