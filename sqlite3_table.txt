@@ -1,0 +1,17 @@
+CREATE TABLE flashcards_card (
+	card_id integer PRIMARY KEY,
+	client text,
+	deck text,
+	english text,
+	polish text,
+	publication_date integer,
+	due_date integer,
+	interval integer,
+	number_of_reviews integer,
+	answers text,
+	card_opening_times text,
+	card_closing_times text,
+	durations text,
+	card_revision_days text,
+	line integer
+);
